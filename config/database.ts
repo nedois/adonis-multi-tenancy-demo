@@ -2,9 +2,9 @@ import env from '#start/env'
 import { defineConfig } from '@adonisjs/lucid'
 
 const dbConfig = defineConfig({
-  connection: 'postgres',
+  connection: 'backoffice',
   connections: {
-    postgres: {
+    backoffice: {
       client: 'pg',
       connection: {
         host: env.get('DB_HOST'),
@@ -12,11 +12,16 @@ const dbConfig = defineConfig({
         user: env.get('DB_USER'),
         password: env.get('DB_PASSWORD'),
         database: env.get('DB_DATABASE'),
+        ssl: env.get('DB_SSL'),
       },
       migrations: {
         naturalSort: true,
-        paths: ['database/migrations'],
+        paths: ['database/migrations/public', 'database/migrations/backoffice'],
       },
+      seeders: {
+        paths: ['database/seeders/public', 'database/seeders/backoffice'],
+      },
+      searchPath: ['backoffice', 'public'],
     },
   },
 })
