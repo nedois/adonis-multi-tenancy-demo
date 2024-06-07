@@ -19,7 +19,7 @@ export default class Admin extends compose(BaseModel, AuthFinder) {
   @column()
   declare fullName: string
 
-  @column()
+  @column({ prepare: (value: string) => value.toLowerCase() })
   declare email: string
 
   @column({ serializeAs: null })
