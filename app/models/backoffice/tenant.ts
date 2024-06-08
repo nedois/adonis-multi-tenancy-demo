@@ -41,7 +41,7 @@ export default class Tenant extends BaseModel {
   }
 
   /** Returns the connection name of the tenant */
-  private get connectionName() {
+  get connectionName() {
     return `${Tenant.connectionNamePrefix}${this.id}`
   }
 

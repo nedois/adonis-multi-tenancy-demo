@@ -54,7 +54,7 @@ export default defineConfig({
     () => import('#start/routes/tenant'),
     () => import('#start/routes/backoffice'),
     () => import('#start/kernel'),
-    () => import('#start/events')
+    () => import('#start/events'),
   ],
 
   /*
