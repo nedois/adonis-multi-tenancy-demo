@@ -3,6 +3,7 @@ import { middleware } from '#start/kernel'
 
 const AccountController = () => import('#controllers/backoffice/account_controller')
 const AuthenticationController = () => import('#controllers/backoffice/authentication_controller')
+const TenantsController = () => import('#controllers/backoffice/tenants_controller')
 
 // Backoffice routes
 router
@@ -17,6 +18,9 @@ router
 
         // Account
         router.get('account', [AccountController, 'show'])
+
+        // Mange tenants
+        router.resource('tenants', TenantsController).apiOnly()
       })
       .use(middleware.auth({ guards: ['backoffice'] }))
   })
