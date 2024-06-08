@@ -15,18 +15,17 @@ router
     // Registration
     router.post('signup', [RegistrationController, 'store'])
 
-    router
-      .group(() => {
-        // Logout
-        router.delete('logout', [AuthenticationController, 'delete'])
+    router.group(() => {
+      // Logout
+      router.delete('logout', [AuthenticationController, 'delete'])
 
-        // Account
-        router.get('account', [AccountController, 'show'])
+      // Account
+      router.get('account', [AccountController, 'show'])
 
-        // Mange users
-        router.resource('users', UsersController).apiOnly()
-      })
-      .use(middleware.auth({ guards: ['tenant'] }))
+      // Mange users
+      router.resource('users', UsersController).apiOnly()
+    })
+    // .use(middleware.auth({ guards: ['tenant'] }))
   })
   .prefix('tenant')
   .use(middleware.tenant())

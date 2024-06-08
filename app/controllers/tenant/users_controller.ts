@@ -6,6 +6,6 @@ export default class UsersController {
     const page = request.input('page', 1)
     const limit = request.input('limit', 10)
 
-    return User.query().paginate(page, limit)
+    return User.query().preload('country').paginate(page, limit)
   }
 }

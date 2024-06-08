@@ -5,5 +5,6 @@ export const store = vine.compile(
     fullName: vine.string(),
     email: vine.string().email(),
     password: vine.string(),
+    countryId: vine.string().uuid().optional(),
   })
 )

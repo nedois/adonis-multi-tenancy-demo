@@ -8,8 +8,6 @@ export default class extends BaseSchema {
       table.uuid('id').primary().defaultTo(this.raw('uuid_generate_v4()'))
       table.string('name').unique().notNullable()
       table.string('iso', 2).unique().notNullable()
-      table.timestamp('created_at').notNullable()
-      table.timestamp('updated_at').notNullable()
     })
   }
 
