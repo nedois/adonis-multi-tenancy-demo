@@ -77,3 +77,5 @@ All routes below require the `X-Tenant-Id` header to be set with the tenant id.
 
 - Get the current tenant: `request.tenant()`
 - Start a database transaction in the tenant scope: `tenant.getConnection().transaction(async (trx) => { ... })`
+- Migrate a single tenant: `node ace migration:tenant:run -t=tenantId`
+- Migrate all tenants: `node ace migration:tenant:run`

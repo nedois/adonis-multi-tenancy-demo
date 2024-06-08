@@ -3,7 +3,7 @@ import type { CommandOptions } from '@adonisjs/core/types/ace'
 import Tenant from '#models/backoffice/tenant'
 
 export default class RunTenantMigrations extends BaseCommand {
-  static readonly commandName = 'migration:tenants:run'
+  static readonly commandName = 'migration:tenant:run'
 
   static readonly description = 'Migrate the tenant schema'
 
