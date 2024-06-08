@@ -135,12 +135,15 @@ export default class Tenant extends BaseModel {
 
   /** Resolve the tenant from the header */
   static async findFromHeader(header: string) {
-    const tenant = await cache.namespace('tenants').getOrSet({
-      key: `tenant:${header}`,
-      factory: () => Tenant.query().where('id', header).firstOrFail(),
-    })
-
-    // Cached tenant is a plain object, merge it with the model
-    return new Tenant().merge(tenant)
+    return (
+      cache
+        .namespace('tenants')
+        .getOrSet({
+          key: `tenant:${header}`,
+          factory: () => Tenant.query().where('id', header).firstOrFail(),
+        })
+        // Cached tenant is a plain object, merge it with the model
+        .then((tenant) => new Tenant().merge(tenant))
+    )
   }
 }
