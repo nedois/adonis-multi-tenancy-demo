@@ -1,6 +1,7 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import * as validator from '#validators/backoffice/tenant'
 import Tenant from '#models/backoffice/tenant'
+import TenantCreated from '#events/backoffice/tenant_created'
 
 export default class TenantsController {
   async index({ request }: HttpContext) {
@@ -14,8 +15,7 @@ export default class TenantsController {
     const data = await request.validateUsing(validator.store)
     const tenant = await new Tenant().merge(data).save()
 
-    // FIXME: This should be a job
-    await tenant.install()
+    await TenantCreated.dispatch(tenant)
 
     return tenant
   }

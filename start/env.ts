@@ -30,10 +30,13 @@ export default await Env.create(new URL('../', import.meta.url), {
   // Bull queue
   QUEUE_REDIS_HOST: Env.schema.string({ format: 'host' }),
   QUEUE_REDIS_PORT: Env.schema.number(),
+  QUEUE_REDIS_USERNAME: Env.schema.string.optional(),
   QUEUE_REDIS_PASSWORD: Env.schema.string.optional(),
+  QUEUE_REDIS_DB: Env.schema.number(),
 
   // Redis
   REDIS_HOST: Env.schema.string({ format: 'host' }),
   REDIS_PORT: Env.schema.number(),
+  REDIS_USERNAME: Env.schema.string.optional(),
   REDIS_PASSWORD: Env.schema.string.optional(),
 })
