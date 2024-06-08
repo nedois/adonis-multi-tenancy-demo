@@ -46,7 +46,7 @@ export default class Tenant extends BaseModel {
   }
 
   /** Returns the schema name of the tenant */
-  private get schemaName() {
+  get schemaName() {
     return `${Tenant.schemaNamePrefix}${this.id}`
   }
 
