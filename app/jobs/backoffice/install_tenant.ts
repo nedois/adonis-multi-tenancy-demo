@@ -1,4 +1,4 @@
-import { Job } from '@rlanz/bull-queue'
+import { Job } from '#services/queue'
 import Tenant from '#models/backoffice/tenant'
 
 interface InstallTenantPayload {

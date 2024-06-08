@@ -1,4 +1,4 @@
-import queue from '@rlanz/bull-queue/services/main'
+import queue from '#services/queue'
 import TenantCreatedEvent from '#events/backoffice/tenant_created'
 import InstallTenant from '#jobs/backoffice/install_tenant'
 
