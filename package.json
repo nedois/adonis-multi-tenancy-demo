@@ -56,6 +56,8 @@
     "@adonisjs/core": "^6.9.0",
     "@adonisjs/cors": "^2.2.1",
     "@adonisjs/lucid": "^20.6.0",
+    "@adonisjs/redis": "^8.0.1",
+    "@rlanz/bull-queue": "^3.0.0",
     "@vinejs/vine": "^2.0.0",
     "luxon": "^3.4.4",
     "pg": "^8.12.0",
