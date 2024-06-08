@@ -1,14 +1,8 @@
-import env from '#start/env'
 import { defineConfig } from '@rlanz/bull-queue'
+import redisConfig from '#config/redis'
 
 export default defineConfig({
-  defaultConnection: {
-    host: env.get('QUEUE_REDIS_HOST'),
-    port: env.get('QUEUE_REDIS_PORT'),
-    username: env.get('QUEUE_REDIS_USERNAME'),
-    password: env.get('QUEUE_REDIS_PASSWORD'),
-    db: env.get('QUEUE_REDIS_DB'),
-  },
+  defaultConnection: redisConfig.connections.queue,
 
   queue: {},
 

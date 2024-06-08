@@ -6,6 +6,7 @@ import { MigrationRunner } from '@adonisjs/lucid/migration'
 import type { MigratorOptions } from '@adonisjs/lucid/types/migrator'
 import type { PostgreConfig } from '@adonisjs/lucid/types/database'
 import { BaseModel, column } from '@adonisjs/lucid/orm'
+import cache from '#services/cache'
 
 /**
  * Tenant can't extend the BackofficeBaseModel
@@ -133,8 +134,13 @@ export default class Tenant extends BaseModel {
   }
 
   /** Resolve the tenant from the header */
-  static findFromHeader(header: string) {
-    // FIXME: Cache the result for better performance
-    return Tenant.query().where('id', header).firstOrFail()
+  static async findFromHeader(header: string) {
+    const tenant = await cache.namespace('tenants').getOrSet({
+      key: `tenant:${header}`,
+      factory: () => Tenant.query().where('id', header).firstOrFail(),
+    })
+
+    // Cached tenant is a plain object, merge it with the model
+    return new Tenant().merge(tenant)
   }
 }
