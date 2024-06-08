@@ -14,7 +14,7 @@ const defaultConnectionOptions = {
 } as const
 
 const dbConfig = defineConfig({
-  connection: 'public',
+  connection: 'tenant',
   connections: {
     public: {
       ...defaultConnectionOptions,

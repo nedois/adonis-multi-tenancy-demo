@@ -21,8 +21,9 @@ export default class TenantAdapter extends DefaultLucidAdapter {
 
     // Inside a request set the tenant connection name
     // from the header.
-    // Seeders and migrations will pass the connection
-    // name explicitly
+    // Otherwise, use the default connection to handle seeders
+    // and migrations.
+    // The default connection should always be "tenant" in config file
     if (context) {
       const tenantHeader = context.request.header(env.get('TENANT_HEADER_KEY'))
       assert(tenantHeader, new MissingTenantHeaderException())

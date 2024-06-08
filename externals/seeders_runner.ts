@@ -80,6 +80,7 @@ export class SeedsRunner {
 
     try {
       const seederInstance = new Source(this.client)
+
       if (typeof seederInstance.run !== 'function') {
         throw new Error(`Missing method "run" on "${seeder.file.name}" seeder`)
       }
