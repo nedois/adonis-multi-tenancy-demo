@@ -1,18 +1,17 @@
 import { DateTime } from 'luxon'
 import hash from '@adonisjs/core/services/hash'
 import { compose } from '@adonisjs/core/helpers'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { column } from '@adonisjs/lucid/orm'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
+import BackofficeBaseModel from '#models/backoffice/backoffice_base_model'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['email'],
   passwordColumnName: 'password',
 })
 
-export default class Admin extends compose(BaseModel, AuthFinder) {
-  static readonly table = 'backoffice.admins'
-
+export default class Admin extends compose(BackofficeBaseModel, AuthFinder) {
   @column({ isPrimary: true })
   declare id: string
 

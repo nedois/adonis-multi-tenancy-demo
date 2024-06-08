@@ -11,7 +11,7 @@ import env from '#start/env'
  */
 export default class TenantAdapter extends DefaultLucidAdapter {
   override modelConstructorClient(modelConstructor: LucidModel, options?: ModelAdapterOptions) {
-    if (options && options.client) {
+    if (options?.client) {
       return options.client
     }
 
@@ -21,8 +21,7 @@ export default class TenantAdapter extends DefaultLucidAdapter {
 
     const tenantConnectionName = Tenant.connectionNameFromHeader(tenantHeader)
 
-    const connection =
-      (options && options.connection) || modelConstructor.connection || tenantConnectionName
+    const connection = options?.connection || modelConstructor?.connection || tenantConnectionName
 
     return this.db.connection(connection)
   }
