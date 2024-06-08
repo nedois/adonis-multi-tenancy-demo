@@ -9,5 +9,7 @@ class PublicNamingStragegy extends CamelCaseNamingStrategy {
 }
 
 export default class PublicBaseModel extends BaseModel {
+  static readonly connection = 'public'
+
   static readonly namingStrategy = new PublicNamingStragegy()
 }
