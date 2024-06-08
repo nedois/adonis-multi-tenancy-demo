@@ -15,11 +15,20 @@ export default class TenantAdapter extends DefaultLucidAdapter {
       return options.client
     }
 
-    const { request } = HttpContext.getOrFail()
-    const tenantHeader = request.header(env.get('TENANT_HEADER_KEY'))
-    assert(tenantHeader, new MissingTenantHeaderException())
+    let tenantConnectionName: string | undefined
 
-    const tenantConnectionName = Tenant.connectionNameFromHeader(tenantHeader)
+    const context = HttpContext.get()
+
+    // Inside a request set the tenant connection name
+    // from the header.
+    // Seeders and migrations will pass the connection
+    // name explicitly
+    if (context) {
+      const tenantHeader = context.request.header(env.get('TENANT_HEADER_KEY'))
+      assert(tenantHeader, new MissingTenantHeaderException())
+
+      tenantConnectionName = Tenant.connectionNameFromHeader(tenantHeader)
+    }
 
     const connection = options?.connection || modelConstructor?.connection || tenantConnectionName
 
