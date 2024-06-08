@@ -8,6 +8,10 @@ import type { PostgreConfig } from '@adonisjs/lucid/types/database'
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 
 export default class Tenant extends BaseModel {
+  static readonly connectionNamePrefix = 'tenant_'
+
+  static readonly schemaNamePrefix = 'tenant_'
+
   static readonly table = 'backoffice.tenants'
 
   @column({ isPrimary: true })
@@ -25,14 +29,19 @@ export default class Tenant extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
 
+  /** Returns the connection name from the header value */
+  static connectionNameFromHeader(header: string) {
+    return `${Tenant.connectionNamePrefix}${header}`
+  }
+
   /** Returns the connection name of the tenant */
   private get connectionName() {
-    return `tenant_${this.id}`
+    return `${Tenant.connectionNamePrefix}${this.id}`
   }
 
   /** Returns the schema name of the tenant */
   private get schemaName() {
-    return `tenant_${this.id}`
+    return `${Tenant.schemaNamePrefix}${this.id}`
   }
 
   /** Create tenant schema in database */
