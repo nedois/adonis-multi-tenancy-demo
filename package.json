@@ -29,7 +29,8 @@
     "#database/*": "./database/*.js",
     "#start/*": "./start/*.js",
     "#tests/*": "./tests/*.js",
-    "#config/*": "./config/*.js"
+    "#config/*": "./config/*.js",
+    "#extensions/*": "./extensions/*.js"
   },
   "devDependencies": {
     "@adonisjs/assembler": "^7.6.1",

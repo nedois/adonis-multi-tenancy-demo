@@ -11,6 +11,12 @@ const authConfig = defineConfig({
         model: () => import('#models/backoffice/admin'),
       }),
     }),
+    tenant: tokensGuard({
+      provider: tokensUserProvider({
+        tokens: 'accessTokens',
+        model: () => import('#models/tenant/user'),
+      }),
+    }),
   },
 })
 

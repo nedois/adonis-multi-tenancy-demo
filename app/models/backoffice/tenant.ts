@@ -117,4 +117,10 @@ export default class Tenant extends BaseModel {
     // 2. Drop tenant schema
     await this.dropSchema()
   }
+
+  /** Resolve the tenant from the header */
+  static findFromHeader(header: string) {
+    // FIXME: Cache the result for better performance
+    return Tenant.query().where('id', header).firstOrFail()
+  }
 }
