@@ -74,6 +74,10 @@ export default class Tenant extends BaseModel {
 
     await migrator.run()
 
+    if (migrator.error) {
+      throw migrator.error
+    }
+
     return migrator
   }
 
@@ -96,8 +100,8 @@ export default class Tenant extends BaseModel {
     db.manager.add(this.connectionName, {
       ...config,
       // Set the search path to the tenant schema so that
-      // model tables are searched only in the tenant and public schema
-      searchPath: [this.schemaName, 'public'],
+      // model tables are searched only in the tenant schema
+      searchPath: [this.schemaName],
     } as PostgreConfig)
 
     return db.connection(this.connectionName)

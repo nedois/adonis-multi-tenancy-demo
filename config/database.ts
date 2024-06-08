@@ -14,18 +14,30 @@ const defaultConnectionOptions = {
 } as const
 
 const dbConfig = defineConfig({
-  connection: 'tenant',
+  connection: 'public',
   connections: {
+    public: {
+      ...defaultConnectionOptions,
+      migrations: {
+        naturalSort: true,
+        paths: ['database/migrations/public'],
+      },
+      seeders: {
+        paths: ['database/seeders/public'],
+      },
+      searchPath: ['public'],
+    },
+
     backoffice: {
       ...defaultConnectionOptions,
       migrations: {
         naturalSort: true,
-        paths: ['database/migrations/public', 'database/migrations/backoffice'],
+        paths: ['database/migrations/backoffice'],
       },
       seeders: {
-        paths: ['database/seeders/public', 'database/seeders/backoffice'],
+        paths: ['database/seeders/backoffice'],
       },
-      searchPath: ['backoffice', 'public'],
+      searchPath: ['backoffice'],
     },
 
     tenant: {
@@ -37,6 +49,7 @@ const dbConfig = defineConfig({
       seeders: {
         paths: ['database/seeders/tenant'],
       },
+      searchPath: ['tenant_tenantId'],
     },
   },
 })

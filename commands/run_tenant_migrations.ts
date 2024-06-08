@@ -2,8 +2,6 @@ import { BaseCommand, flags } from '@adonisjs/core/ace'
 import type { CommandOptions } from '@adonisjs/core/types/ace'
 import Tenant from '#models/backoffice/tenant'
 
-const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
-
 export default class RunTenantMigrations extends BaseCommand {
   static readonly commandName = 'migration:tenants:run'
 
