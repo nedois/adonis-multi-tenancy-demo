@@ -14,7 +14,7 @@ export default class AuthenticationController {
   }
 
   async delete({ auth }: HttpContext) {
-    const user = auth.getUserOrFail()
+    const user = auth.use('tenant').getUserOrFail()
     await User.accessTokens.delete(user, user.currentAccessToken.identifier)
   }
 }

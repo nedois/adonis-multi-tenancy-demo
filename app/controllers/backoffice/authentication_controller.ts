@@ -14,7 +14,7 @@ export default class AuthenticationController {
   }
 
   async delete({ auth }: HttpContext) {
-    const admin = auth.getUserOrFail()
+    const admin = auth.use('backoffice').getUserOrFail()
     await Admin.accessTokens.delete(admin, admin.currentAccessToken.identifier)
   }
 }
