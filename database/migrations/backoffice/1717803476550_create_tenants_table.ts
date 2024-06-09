@@ -5,7 +5,7 @@ export default class extends BaseSchema {
 
   async up() {
     this.schema.withSchema('backoffice').createTable(this.tableName, (table) => {
-      table.uuid('id').primary().defaultTo(this.raw('uuid_generate_v4()'))
+      table.uuid('id').primary().defaultTo(this.raw('gen_random_uuid()'))
       table.string('name').notNullable()
       table.string('email').notNullable().unique()
       table.timestamp('created_at').notNullable()
