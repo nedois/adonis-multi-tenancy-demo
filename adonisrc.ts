@@ -39,6 +39,7 @@ export default defineConfig({
     () => import('#providers/app_provider'),
     () => import('@rlanz/bull-queue/queue_provider'),
     () => import('@adonisjs/redis/redis_provider'),
+    () => import('#providers/tenancy_provider')
   ],
 
   /*

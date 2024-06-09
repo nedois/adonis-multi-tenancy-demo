@@ -5,20 +5,14 @@ import app from '@adonisjs/core/services/app'
 import { MigrationRunner } from '@adonisjs/lucid/migration'
 import type { MigratorOptions } from '@adonisjs/lucid/types/migrator'
 import type { PostgreConfig } from '@adonisjs/lucid/types/database'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { column } from '@adonisjs/lucid/orm'
+import BackofficeBaseModel from '#models/backoffice/backoffice_base_model'
 import cache from '#services/cache'
 
-/**
- * Tenant can't extend the BackofficeBaseModel
- * because the database instance in the adapter
- * resolves to undefined, find the reason why
- */
-export default class Tenant extends BaseModel {
+export default class Tenant extends BackofficeBaseModel {
   static readonly connectionNamePrefix = 'tenant_'
 
   static readonly schemaNamePrefix = 'tenant_'
-
-  static readonly table = 'backoffice.tenants'
 
   @column({ isPrimary: true })
   declare id: string
