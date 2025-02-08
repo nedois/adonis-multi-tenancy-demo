@@ -1,19 +1,16 @@
-import assert from 'node:assert'
-import { DateTime } from 'luxon'
-import db from '@adonisjs/lucid/services/db'
-import app from '@adonisjs/core/services/app'
-import { MigrationRunner } from '@adonisjs/lucid/migration'
-import type { MigratorOptions } from '@adonisjs/lucid/types/migrator'
-import type { PostgreConfig } from '@adonisjs/lucid/types/database'
-import { column } from '@adonisjs/lucid/orm'
+import multitenancyConfig from '#config/multitenancy'
 import BackofficeBaseModel from '#models/backoffice/backoffice_base_model'
 import cache from '#services/cache'
+import app from '@adonisjs/core/services/app'
+import { MigrationRunner } from '@adonisjs/lucid/migration'
+import { column } from '@adonisjs/lucid/orm'
+import db from '@adonisjs/lucid/services/db'
+import type { PostgreConfig } from '@adonisjs/lucid/types/database'
+import type { MigratorOptions } from '@adonisjs/lucid/types/migrator'
+import { DateTime } from 'luxon'
+import assert from 'node:assert'
 
 export default class Tenant extends BackofficeBaseModel {
-  static readonly connectionNamePrefix = 'tenant_'
-
-  static readonly schemaNamePrefix = 'tenant_'
-
   @column({ isPrimary: true })
   declare id: string
 
@@ -31,17 +28,17 @@ export default class Tenant extends BackofficeBaseModel {
 
   /** Returns the connection name from the header value */
   static connectionNameFromHeader(header: string) {
-    return `${Tenant.connectionNamePrefix}${header}`
+    return `${multitenancyConfig.tenantConnectionNamePrefix}${header}`
   }
 
   /** Returns the connection name of the tenant */
   private get connectionName() {
-    return `${Tenant.connectionNamePrefix}${this.id}`
+    return `${multitenancyConfig.tenantConnectionNamePrefix}${this.id}`
   }
 
   /** Returns the schema name of the tenant */
   get schemaName() {
-    return `${Tenant.schemaNamePrefix}${this.id}`
+    return `${multitenancyConfig.tenantSchemaPrefix}${this.id}`
   }
 
   /** Create tenant schema in database */

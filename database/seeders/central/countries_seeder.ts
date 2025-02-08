@@ -1,5 +1,5 @@
+import Country from '#models/central/country'
 import { BaseSeeder } from '@adonisjs/lucid/seeders'
-import Country from '#models/public/country'
 
 export default class extends BaseSeeder {
   async run() {

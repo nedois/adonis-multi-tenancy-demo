@@ -4,7 +4,7 @@ export default class extends BaseSchema {
   protected tableName = 'auth_access_tokens'
 
   async up() {
-    this.schema.withSchema('backoffice').createTable(this.tableName, (table) => {
+    this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
       table
         .uuid('tokenable_id')
@@ -24,6 +24,6 @@ export default class extends BaseSchema {
   }
 
   async down() {
-    this.schema.withSchema('backoffice').dropTable(this.tableName)
+    this.schema.dropTable(this.tableName)
   }
 }

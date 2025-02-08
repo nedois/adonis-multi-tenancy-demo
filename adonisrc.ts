@@ -39,7 +39,7 @@ export default defineConfig({
     () => import('#providers/app_provider'),
     () => import('@rlanz/bull-queue/queue_provider'),
     () => import('@adonisjs/redis/redis_provider'),
-    () => import('#providers/tenancy_provider')
+    () => import('#providers/tenancy_provider'),
   ],
 
   /*
@@ -51,7 +51,7 @@ export default defineConfig({
   |
   */
   preloads: [
-    () => import('#start/routes/public'),
+    () => import('#start/routes/central'),
     () => import('#start/routes/tenant'),
     () => import('#start/routes/backoffice'),
     () => import('#start/kernel'),

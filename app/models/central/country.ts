@@ -1,7 +1,7 @@
+import CentralBaseModel from '#models/central/central_base_model'
 import { column } from '@adonisjs/lucid/orm'
-import PublicBaseModel from '#models/public/public_base_model'
 
-export default class Country extends PublicBaseModel {
+export default class Country extends CentralBaseModel {
   @column({ isPrimary: true })
   declare id: string
 

@@ -9,7 +9,7 @@ This is a demo project to show how to implement a schema based multi tenancy in 
 - [x] **Tenant middleware**: Automatically switch the tenant based on the request header.
 - [x] **Tenant models**: Lucid models are automatically scoped to the current tenant.
 - [x] **Backoffice isolation**: Backoffice models, requests and controllers are isolated from tenants.
-- [x] **Public schema**: Shared tables are stored in the public schema.
+- [x] **Central schema**: Shared tables are stored in the central schema.
 
 ## Get started
 
@@ -31,11 +31,11 @@ cp .env.example .env
 docker-compose up -d
 ```
 
-4. Setup public and backoffice schemas
+4. Setup central and backoffice schemas
 
 ```bash
-node ace migration:run -c=public
-node ace db:seed -c=public
+node ace migration:run -c=central
+node ace db:seed -c=central
 
 node ace backoffice:setup
 node ace migration:run -c=backoffice
@@ -51,7 +51,7 @@ node ace queue:listen
 
 ## Demo routes
 
-### Public
+### Central
 
 - `GET /countries`: List all countries.
 

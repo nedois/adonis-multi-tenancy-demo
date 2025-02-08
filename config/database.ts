@@ -1,3 +1,4 @@
+import multitenancyConfig from '#config/multitenancy'
 import env from '#start/env'
 import { defineConfig } from '@adonisjs/lucid'
 
@@ -16,20 +17,21 @@ const defaultConnectionOptions = {
 const dbConfig = defineConfig({
   connection: 'tenant',
   connections: {
-    public: {
+    [multitenancyConfig.centralConnectionName]: {
       ...defaultConnectionOptions,
+      searchPath: [multitenancyConfig.centralSchemaName],
       migrations: {
         naturalSort: true,
-        paths: ['database/migrations/public'],
+        paths: ['database/migrations/central'],
       },
       seeders: {
-        paths: ['database/seeders/public'],
+        paths: ['database/seeders/central'],
       },
-      searchPath: ['public'],
     },
 
-    backoffice: {
+    [multitenancyConfig.backofficeConnectionName]: {
       ...defaultConnectionOptions,
+      searchPath: [multitenancyConfig.backofficeSchemaName],
       migrations: {
         naturalSort: true,
         paths: ['database/migrations/backoffice'],
@@ -37,11 +39,11 @@ const dbConfig = defineConfig({
       seeders: {
         paths: ['database/seeders/backoffice'],
       },
-      searchPath: ['backoffice'],
     },
 
     tenant: {
       ...defaultConnectionOptions,
+      searchPath: [`${multitenancyConfig.tenantSchemaPrefix}_tenantId`],
       migrations: {
         naturalSort: true,
         paths: ['database/migrations/tenant'],
@@ -49,7 +51,6 @@ const dbConfig = defineConfig({
       seeders: {
         paths: ['database/seeders/tenant'],
       },
-      searchPath: ['tenant_tenantId'],
     },
   },
 })

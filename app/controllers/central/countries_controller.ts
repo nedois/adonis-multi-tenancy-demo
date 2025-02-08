@@ -1,5 +1,5 @@
+import Country from '#models/central/country'
 import type { HttpContext } from '@adonisjs/core/http'
-import Country from '#models/public/country'
 
 export default class CountriesController {
   async index({ request }: HttpContext) {
