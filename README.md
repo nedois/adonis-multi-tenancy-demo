@@ -31,15 +31,14 @@ cp .env.example .env
 docker-compose up -d
 ```
 
-4. Setup central and backoffice schemas
+4. Setup central and backoffice schemas (check the ``config/multitenancy.ts` file for the connection names)
 
 ```bash
-node ace migration:run -c=central
-node ace db:seed -c=central
+node ace migration:run -c=<< central connection name >>
+node ace db:seed -c=<< central connection name >>
 
-node ace backoffice:setup
-node ace migration:run -c=backoffice
-node ace db:seed -c=backoffice
+node ace migration:run -c=<< backoffice connection name >>
+node ace db:seed -c=<< backoffice connection name >>
 ```
 
 5. Start the server and bull queue
